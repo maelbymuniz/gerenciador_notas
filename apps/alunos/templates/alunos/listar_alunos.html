@@ -9,7 +9,7 @@
 
     <ul>
         {% for aluno in alunos %}
-            <li>{{ aluno.nome }}
+            <li>{{ aluno.nome }} {{ aluno.turma}}
                 - 
                 <a href="{% url 'editar_aluno' aluno.id %}">Editar</a>
                 |

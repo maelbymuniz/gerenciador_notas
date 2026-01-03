@@ -1,8 +1,18 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Aluno
 from .forms import AlunoForm
+from apps.turmas.models import Turma
+from django.contrib import messages
+
 
 def criar_aluno(request):
+    if not Turma.objects.filter(ativo=True).exists():
+        messages.error(
+            request,
+            'Você precisa cadastrar uma turma antes de criar alunos.'
+        )
+        return redirect('listar_turmas')
+    
     if request.method == 'POST':
         form = AlunoForm(request.POST)
         if form.is_valid():
